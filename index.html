@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clement954</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClementKipngetichDev</title>
+  <meta name="description" content="Personal portfolio of Clement Kipngetich, a software developer building fast, simple websites and ordering systems for shoe boutiques.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+<!-- --------------------------------navbar section------------------------------- -->
+
 <body>
-    
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="logo"><span class="logo__mark">&lt;/&gt;</span> Clement<span class="accent">.dev</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav__links" id="navLinks">
+        <a href="#testimonials">Testimonials</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button class="theme" id="themeBtn" aria-label="Toggle dark mode">◐</button>
+        <a href="#contact" class="btn btn--primary btn--sm">Talk to me &rarr;</a>
+      </nav>
+    </div>
+  </header>
+<!-- --------------------------------hero section------------------------------- -->
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <p class="status"><span class="dot"></span>I'm now available for new projects</p>
+          <h3>Hi, I'm Clement.<br>I build websites for...<br><span class="accent">Organizations, Parastatals and Companies.</span></h3>
+          <p class="lead">I specialize in building digital solutions, user friendly applications using various programming languages. I am passionate about solving problems and creating seamless digital experiences.</p>
+          <div class="btn-row">
+            <a href="#projects" class="btn btn--primary">See my work &darr;</a>
+            <a href="#testimonials" class="btn btn--outline">What client says</a>
+          </div>
+          <ul class="skills"><li>Storefronts</li><li>Orders</li><li>Inventory</li><li>M-Pesa checkout</li></ul>
+        </div>
+        <div class="hero__visual reveal">
+      <figure class="portrait"><img src="images/clement1.jpg" alt="Portrait of Clement" width="800" height="1066" fetchpriority="high"></figure>
+        </div>
+      </div>
+    </section>
+<!-- --------------------------------Testimonials section------------------------------- -->
+    <section class="section section--tint" id="testimonials">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <p class="eyebrow">/ Testimonials</p>
+            <h2>What people say<br>about working with me.</h2>
+            <p class="sub">Feedback from customers who've visited the boutique, ordered online, and teams I've worked with.</p>
+          </div>
+          <div class="arrows">
+            <button class="arrow" id="prevBtn" aria-label="Previous testimonials">&#8249;</button>
+            <button class="arrow arrow--active" id="nextBtn" aria-label="Next testimonials">&#8250;</button>
+          </div>
+        </div>
+        <div class="grid grid--3" id="testimonialList"></div>
+      </div>
+    </section>
+<!-- --------------------------------Projects section------------------------------- -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="reveal">
+          <p class="eyebrow">/ Projects</p>
+          <h2>Selected work</h2>
+          <p class="sub">Here's a selection of one of my recent projects. Online store website, ShoeGame store.  </p>
+        </div>
+        <div id="featuredProject"></div>
+        <div class="grid grid--2" id="projectList"></div>
+      </div>
+    </section>
+  </main>
+<!-- ------------------------Contact section------------------------------- -->
+  <footer class="contact" id="contact">
+    <div class="container contact__inner">
+      <div class="contact__text reveal">
+        <p class="eyebrow eyebrow--light">/ Contact</p>
+        <h2>Have business?<br>Let's get in touch.</h2>
+        <p class="lead lead--light">Feel free to reach out today, send me an email, you'll sure get my return. Let's have a conversation.</p>
+        <ul class="contact__list">
+          <li><span class="icon">✉</span><div><small>Email</small><a href="mailto:clement.kipngetich@student.moringaschool.com">clement.kipngetich@student.moringaschool.com</a></div></li>
+          <li><span class="icon">⌘</span><div><small>GitHub</small><a href="https://github.com/ckclement" target="_blank" rel="noopener">github.com/ckclement</a></div></li>
+        </ul>
+        <div class="btn-row">
+          <a href="mailto:clement.kipngetich@student.moringaschool.com" class="btn btn--primary">Send Email &rarr;</a>
+          <a href="https://github.com/clemoclement" target="_blank" rel="noopener" class="btn btn--outline-light">View GitHub &#8599;</a>
+        </div>
+      </div>
+      <div class="contact__visual"><img src="images/clement1.jpg" alt="Shoe from the ShoeGame store"></div>
+    </div>
+    <div class="container footer__bar">
+      <span>&copy; 2026 Clement Kipngetich</span>
+      <span>Built with HTML &bull; CSS &bull; JavaScript</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+    <!-- -------------------footer ------------------- -->
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>

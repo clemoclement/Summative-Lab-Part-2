@@ -1,0 +1,186 @@
+// ---------- Data ----------
+const testimonials = [
+  {
+    quote: "The online store now loads fast and customers can order sneakers without missing out. Thoughtful, Clock-It.",
+    name: "Amina Wanjiru",
+    role: "Customer, Satisfied",
+    initials: "AW"
+  },
+  {
+    quote: "Delivered a perfect product. My website has helped me keep my services seamless. Got a good system just as ordered, promised and adhered to detail.",
+    name: "Brian Kibet",
+    role: "C.E.O, COINLINK ",
+    initials: "BO"
+  },
+  {
+    quote: " My all time admin. keep up the good work sir. You really have a deep understanding of customer needs.",
+    name: "Sylvia Achieng",
+    role: "General Manager, Uchumi SACCO",
+    initials: "SA"
+  },
+  {
+    quote: "Orders now arrive neatly and organised to all my clients. The link to WhatsApp and email eased my communications. It saved our team hours every week.",
+    name: "Peter Kimani",
+    role: "Founder, Urban Wears",
+    initials: "PK"
+  },
+  {
+    quote: "Our mobile shoppers finally have a smooth checkout. Sales from phones have clearly improved.",
+    name: "Lucy Achieng",
+    role: "Marketing Lead, Leather & Lace",
+    initials: "LA"
+  }
+];
+
+const projects = [
+  {
+    title: "ShoeGame Online Store",
+    featured: true,
+    description: "Browse on our site and check out our latest stock. Check out shoes by size, colour and category, with a cart and secure payment checkout that supports M-Pesa payments prompts.",
+    tech: ["Jordans", "Chelsea Boots", "Nikes", "Vans", "Adidas", "Puma", "Converse", "Reebok"],
+    stats: [["1,240", "Pairs listed"], ["320", "Customers"], ["95%", "Checkout success"]],
+    image: "images/sneakers1.webp",
+    link: "#"
+  },
+  {
+    title: "Inventory Management System",
+    featured: false,
+    description: "A web-based tool that tracks stock by shoe model, size and colour, flags low stock, and records sales and deliveries.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "images/inventory.jpg",
+    link: "#"
+  },
+  {
+    title: "Online Ordering System",
+    featured: false,
+    description: "A responsive ordering page where customers pick a pair, choose their size, place an order, make seamless payments and follow its status of delivery.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "images/onlinepayment.jpg",
+    link: "#"
+  }
+];
+
+// ---------- Testimonials (carousel rendered with a loop) ----------
+const testimonialList = document.getElementById("testimonialList");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+let start = 0;
+
+function perPage() {
+  if (window.innerWidth <= 640) return 1;
+  if (window.innerWidth <= 960) return 2;
+  return 3;
+}
+
+function renderTestimonials() {
+  const count = perPage();
+  testimonialList.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    const t = testimonials[(start + i) % testimonials.length];
+    const card = document.createElement("article");
+    card.className = "card testimonial";
+    card.innerHTML = `
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      <p class="testimonial__text">&ldquo;${t.quote}&rdquo;</p>
+      <div class="person">
+        <span class="avatar">${t.initials}</span>
+        <div><strong>${t.name}</strong><small>${t.role}</small></div>
+      </div>`;
+    testimonialList.appendChild(card);
+  }
+}
+
+prevBtn.addEventListener("click", () => {
+  start = (start - 1 + testimonials.length) % testimonials.length;
+  renderTestimonials();
+});
+nextBtn.addEventListener("click", () => {
+  start = (start + 1) % testimonials.length;
+  renderTestimonials();
+});
+window.addEventListener("resize", renderTestimonials);
+
+// ---------- Projects (rendered with a loop) ----------
+const featuredProject = document.getElementById("featuredProject");
+const projectList = document.getElementById("projectList");
+
+function techTags(tech) {
+  let html = "";
+  for (const item of tech) html += `<li>${item}</li>`;
+  return html;
+}
+
+for (const p of projects) {
+  if (p.featured) {
+    let stats = "";
+    for (const [value, label] of p.stats) {
+      stats += `<div class="stat"><strong>${value}</strong><small>${label}</small></div>`;
+    }
+    featuredProject.innerHTML = `
+      <article class="featured">
+        <div class="featured__text">
+          <span class="badge">Featured project</span>
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <ul class="tags">${techTags(p.tech)}</ul>
+          <a href="${p.link}" class="btn btn--primary">View Project &rarr;</a>
+        </div>
+       <div class="featured__visual">
+  <img class="featured__img" src="${p.image}" alt="${p.title}">
+          <div class="stats">${stats}</div>
+        </div>
+      </article>`;
+  } else {
+    const card = document.createElement("article");
+    card.className = "project";
+    card.innerHTML = `
+     <div class="project__visual"><img src="${p.image}" alt="${p.title}"></div>
+      <h3>${p.title}</h3>
+      <p>${p.description}</p>
+      <ul class="tags">${techTags(p.tech)}</ul>
+      <a href="${p.link}" class="btn btn--primary">View Project &rarr;</a>`;
+    projectList.appendChild(card);
+  }
+}
+
+// ---------- Mobile nav ----------
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+navToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open);
+});
+navLinks.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+renderTestimonials();
+
+// ---------- Theme toggle ----------
+const root = document.documentElement;
+try { const saved = localStorage.getItem("theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const next = root.dataset.theme === "dark" ? "light" : "dark";
+  root.dataset.theme = next;
+  try { localStorage.setItem("theme", next); } catch (e) {}
+});
+
+// ---------- Nav shadow, active link, scroll reveal ----------
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 10), { passive: true });
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+const links = document.querySelectorAll('.nav__links a[href^="#"]:not(.btn)');
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("#testimonials, #projects, #contact").forEach((s) => spy.observe(s));
